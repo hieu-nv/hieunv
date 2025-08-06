@@ -1,0 +1,45 @@
+// SCSS Variables
+$primary-color: #3b82f6;
+$secondary-color: #6b7280;
+$border-radius: 0.5rem;
+
+// Mixins
+@mixin button-style($bg-color, $hover-color) {
+  background-color: $bg-color;
+  border-radius: $border-radius;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-1px);
+  }
+}
+
+// Custom SCSS styles that work alongside TailwindCSS
+.custom-button {
+  @include button-style($primary-color, darken($primary-color, 10%));
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: $border-radius * 2;
+  padding: 2rem;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  
+  h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  p {
+    margin: 0;
+    opacity: 0.9;
+  }
+}
