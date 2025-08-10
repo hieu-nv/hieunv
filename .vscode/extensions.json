@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint",
+        "bradlc.vscode-tailwindcss",
+        "editorconfig.editorconfig",
+        "catppuccin.catppuccin-vsc",
+        "catppuccin.catppuccin-vsc-icons"
+    ]
+}

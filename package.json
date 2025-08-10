@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "interactjs": "^1.10.27",
+    "liquid-glass-react": "^1.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
