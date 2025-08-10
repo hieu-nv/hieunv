@@ -1,11 +1,12 @@
 # Software Architect Profile Component
 
-A sophisticated profile card component showcasing a software architect's skills and experience, enhanced with the liquid glass distortion effect.
+A sophisticated profile card component showcasing a software architect's skills and experience, enhanced with the liquid glass distortion effect and professional project timeline.
 
 ## 🎯 Features
 
 - **Interactive Liquid Glass Effect**: Draggable glass overlay with real-time distortion
 - **Comprehensive Skill Display**: Visual skill bars organized by technology categories
+- **Project History Timeline**: Interactive timeline showcasing career projects and achievements
 - **Professional Design**: Modern glassmorphism design with animated backgrounds
 - **Responsive Layout**: Adapts to different screen sizes
 - **TypeScript Support**: Full type safety and customization options
@@ -23,6 +24,7 @@ A sophisticated profile card component showcasing a software architect's skills 
 
 ### Backend Technologies
 - 🌐 **ASP.NET Core** (88% proficiency)
+- 🍃 **Spring Boot** (92% proficiency)
 
 ### Cloud Infrastructure
 - ☁️ **AWS** (87% proficiency)
@@ -40,15 +42,27 @@ function App() {
 }
 ```
 
-### Customized Profile
+### Customized Profile with Projects
 
 ```tsx
 import SoftwareArchitectProfile from './components/SoftwareArchitectProfile';
 
-const customSkills = [
-  { name: 'Kubernetes', category: 'cloud', level: 90, icon: '☸️', color: 'bg-blue-500' },
-  { name: 'Docker', category: 'cloud', level: 95, icon: '🐳', color: 'bg-blue-400' },
-  // ... more skills
+const customProjects = [
+  {
+    id: '1',
+    title: 'Custom E-Commerce Platform',
+    company: 'Your Company',
+    period: '2023 - Present',
+    description: 'Description of your project...',
+    technologies: ['React', 'Node.js', 'MongoDB'],
+    achievements: [
+      'Increased performance by 50%',
+      'Reduced costs by 30%'
+    ],
+    type: 'enterprise',
+    icon: '�'
+  }
+  // ... more projects
 ];
 
 function App() {
@@ -56,10 +70,7 @@ function App() {
     <SoftwareArchitectProfile
       name="Your Name"
       title="Senior Software Architect"
-      experience="15+ Years Experience"
-      location="Your Location"
-      email="your.email@example.com"
-      skills={customSkills}
+      projects={customProjects}
     />
   );
 }
@@ -78,6 +89,7 @@ interface SoftwareArchitectProfileProps {
   github?: string;
   avatar?: string;
   skills?: Skill[];
+  projects?: Project[];
 }
 
 interface Skill {
@@ -86,6 +98,18 @@ interface Skill {
   level: number; // 1-100
   icon: string;
   color: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+  technologies: string[];
+  achievements: string[];
+  type: 'enterprise' | 'startup' | 'consulting' | 'open-source';
+  icon: string;
 }
 ```
 
@@ -96,37 +120,41 @@ interface Skill {
 - **Glassmorphism**: Frosted glass effect with backdrop blur
 - **Animated Backgrounds**: Pulsing orbs and grid patterns
 - **Skill Visualization**: Animated progress bars with category icons
-- **Liquid Glass Overlay**: Interactive distortion effect
+- **Liquid Glass Overlays**: Interactive distortion effects on multiple sections
+- **Timeline Design**: Professional project timeline with liquid glass backgrounds
+
+### Timeline Features
+- **Interactive Timeline**: Vertical timeline with connected project cards
+- **Project Categories**: Color-coded badges for different project types
+- **Technology Tags**: Visual representation of technologies used
+- **Achievement Lists**: Highlighted accomplishments with checkmarks
+- **Liquid Glass Backgrounds**: Each project card has its own distortion effect
 
 ### Color Scheme
 - **Primary**: Blue to Purple gradient
 - **Background**: Dark slate with purple accents
 - **Text**: White with various opacity levels
 - **Skills**: Color-coded by technology category
-
-### Typography
-- **Headers**: Large, bold gradient text
-- **Body**: Clean, readable sans-serif
-- **Labels**: Icon-enhanced category labels
+- **Project Types**: 
+  - Enterprise: Blue
+  - Startup: Green
+  - Consulting: Purple
+  - Open Source: Orange
 
 ## 🚀 Interactive Elements
 
-### Liquid Glass Effect
-- Draggable distortion overlay
-- Real-time displacement mapping
-- Constrained within viewport boundaries
-- Smooth animation and transitions
+### Liquid Glass Effects
+- **Contact Information**: Background glass distortion
+- **Architecture Philosophy**: Animated glass background
+- **Programming Languages**: Interactive glass overlay
+- **Project Cards**: Individual glass effects for each timeline item
+- **Floating Glass**: Independent draggable element
 
-### Skill Bars
-- Animated progress indication
-- Category-based organization
-- Icon representation for each technology
-- Color-coded proficiency levels
-
-### Contact Information
-- Clickable links for email and social profiles
-- Hover effects for better UX
-- Professional contact layout
+### Timeline Interactions
+- **Visual Timeline**: Connected timeline with gradient lines
+- **Project Cards**: Hover effects and smooth animations
+- **Technology Tags**: Responsive badge system
+- **Achievement Highlighting**: Checkmark system for accomplishments
 
 ## 🏗️ Architecture Highlights
 
@@ -134,43 +162,63 @@ interface Skill {
 ```
 SoftwareArchitectProfile/
 ├── Profile Header (Avatar, Name, Title)
-├── Contact Information Panel
-├── Architecture Philosophy Section
-├── Technical Skills (Categorized)
+├── Contact Information Panel (with Liquid Glass)
+├── Architecture Philosophy Section (with Liquid Glass)
+├── Technical Skills (Categorized with Liquid Glass)
 │   ├── Programming Languages
 │   ├── Frontend Technologies
 │   ├── Backend Technologies
 │   └── Cloud Infrastructure
-├── Liquid Glass Overlay
+├── Project History Timeline
+│   ├── Timeline Header
+│   ├── Project Cards (each with Liquid Glass)
+│   │   ├── Project Header (Title, Company, Type)
+│   │   ├── Description
+│   │   ├── Technology Tags
+│   │   └── Achievement List
+│   └── Timeline Connectors
+├── Floating Liquid Glass Overlay
 └── Decorative Elements
 ```
 
 ### Performance Optimizations
-- Efficient rendering with React best practices
-- Optimized animations using CSS transitions
-- Minimal re-renders with proper state management
-- Responsive design for various screen sizes
+- **Efficient Rendering**: React best practices with proper key props
+- **Optimized Animations**: CSS transitions for smooth effects
+- **Minimal Re-renders**: Proper state management and memoization
+- **Responsive Design**: Fluid layouts for various screen sizes
+- **Timeline Virtualization**: Efficient rendering of large project lists
 
 ## 🎯 Use Cases
 
-- **Portfolio Websites**: Professional developer profiles
-- **Company Team Pages**: Staff showcase
-- **Conference Speaker Profiles**: Technical expertise display
-- **Recruitment Platforms**: Skills visualization
-- **Personal Branding**: Interactive resume replacement
+- **Portfolio Websites**: Professional developer profiles with project showcases
+- **Company Team Pages**: Staff showcase with project history
+- **Conference Speaker Profiles**: Technical expertise and project timeline display
+- **Recruitment Platforms**: Skills and project visualization
+- **Personal Branding**: Interactive resume with career progression
+- **Project Portfolios**: Comprehensive project history presentation
 
 ## 🌟 Customization Tips
 
+### Project Timeline
+1. **Project Icons**: Use relevant emojis or icon fonts for project types
+2. **Timeline Colors**: Customize gradient colors for timeline connectors
+3. **Project Types**: Add custom project categories as needed
+4. **Achievement Format**: Customize achievement display and icons
+5. **Technology Tags**: Style technology badges to match your brand
+
+### Visual Customization
 1. **Avatar Images**: Use high-quality, professional photos (150x150px recommended)
-2. **Skill Icons**: Emoji or icon fonts work well for technology representation
-3. **Color Schemes**: Modify gradient colors to match brand identity
-4. **Content**: Customize the architecture philosophy section
-5. **Additional Skills**: Extend the skill categories as needed
+2. **Color Schemes**: Modify gradient colors to match brand identity
+3. **Glass Effects**: Adjust opacity and blur levels for different aesthetics
+4. **Animation Speed**: Customize transition durations for preferred feel
+5. **Layout Spacing**: Adjust gaps and padding for different screen sizes
 
 ## 🔮 Future Enhancements
 
-- **3D Effects**: Three.js integration for enhanced visuals
-- **Dark/Light Mode**: Theme switching capability
-- **Animation Controls**: User preference for reduced motion
-- **Export Options**: PDF generation for traditional resumes
-- **Social Integration**: Dynamic data from LinkedIn/GitHub APIs
+- **3D Timeline**: Three.js integration for enhanced timeline visualization
+- **Project Filtering**: Filter projects by technology, type, or date range
+- **Interactive Technologies**: Clickable tech tags with detailed information
+- **Achievement Metrics**: Quantified achievement tracking and visualization
+- **Timeline Navigation**: Jump-to-date functionality for long timelines
+- **Export Options**: PDF generation including timeline for traditional resumes
+- **Social Integration**: Dynamic data sync with LinkedIn/GitHub project data

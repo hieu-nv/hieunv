@@ -262,7 +262,7 @@ const LiquidGlass: React.FC<LiquidGlassProps> = ({
           borderRadius: '150px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.25), 0 -10px 25px inset rgba(0, 0, 0, 0.15)',
           cursor: isDragging ? 'grabbing' : 'grab',
-          backdropFilter: `url(#${filterId.current}) blur(1px) contrast(1.2) brightness(1.05) saturate(1.1)`,
+          backdropFilter: `url(#${filterId.current}) blur(0.25px) contrast(1.2) brightness(1.05) saturate(1.1)`,
           zIndex: 9999,
           pointerEvents: 'auto',
           ...style

@@ -3,7 +3,7 @@ import SoftwareArchitectProfile from "./components/SoftwareArchitectProfile";
 
 function App() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full min-h-screen">
       <SoftwareArchitectProfile />
     </div>
   );
