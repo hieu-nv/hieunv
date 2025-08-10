@@ -367,7 +367,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="relative w-full min-h-screen">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse" />
@@ -572,7 +572,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
       </div>
 
       {/* Project Timeline Section */}
-      <div className="relative z-10 py-16 px-8 bg-slate-800/30">
+      <div className="relative z-10 py-16 px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
