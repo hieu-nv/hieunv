@@ -1,10 +1,10 @@
 import "./App.css";
-import LiquidGlassDemo from "./components/LiquidGlassDemo";
+import SoftwareArchitectProfile from "./components/SoftwareArchitectProfile";
 
 function App() {
   return (
     <div className="w-full h-full">
-      <LiquidGlassDemo />
+      <SoftwareArchitectProfile />
     </div>
   );
 }
