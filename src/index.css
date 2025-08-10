@@ -17,7 +17,10 @@ html, body {
   background-size: cover;
   background-position: center; */
 
-  @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900;
+  /* Explicit gradient for better print support */
+  background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 /* Custom scrollbar for our scrollable container */

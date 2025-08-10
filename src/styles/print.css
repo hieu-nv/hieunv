@@ -1,0 +1,262 @@
+/* Print/PDF specific styles */
+@media print {
+  /* Print container adjustments */
+  .print-container {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+  
+  /* Remove background animations and effects for PDF */
+  .fixed {
+    position: static !important;
+  }
+  
+  /* Ensure content fits properly on pages */
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    font-size: 12px !important;
+    background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%) !important;
+    background-attachment: fixed !important;
+  }
+  
+  /* Force gradient background on main container */
+  .print-container {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%) !important;
+    background-attachment: fixed !important;
+  }
+  
+  /* Alternative: Use solid dark background if gradient still doesn't work */
+  html {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+  }
+  
+  /* Ensure root element has background */
+  #root {
+    background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+  }
+  
+  /* Force content to be visible */
+  * {
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+  
+  /* Remove height restrictions that might cut content */
+  .min-h-screen,
+  .h-screen,
+  .vh-100 {
+    min-height: auto !important;
+    height: auto !important;
+  }
+  
+  /* Remove overflow hidden that might cut content */
+  html, body {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  
+  /* Hide scroll indicators and other interactive elements */
+  .animate-bounce,
+  .animate-pulse {
+    animation: none !important;
+    display: none !important;
+  }
+  
+  /* Optimize backgrounds for print */
+  .bg-gradient-to-br,
+  .bg-gradient-to-r,
+  .bg-gradient-to-b {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  
+  /* Force specific gradient classes to show */
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+  }
+  
+  /* Ensure Tailwind gradient classes work in print */
+  .from-slate-900 {
+    --tw-gradient-from: #0f172a !important;
+  }
+  
+  .via-purple-900 {
+    --tw-gradient-via: #581c87 !important;
+  }
+  
+  .to-slate-900 {
+    --tw-gradient-to: #0f172a !important;
+  }
+  
+  /* Force background on progress bars and other elements */
+  .bg-orange-500 { background-color: #f97316 !important; }
+  .bg-blue-400 { background-color: #60a5fa !important; }
+  .bg-red-500 { background-color: #ef4444 !important; }
+  .bg-purple-500 { background-color: #a855f7 !important; }
+  .bg-green-500 { background-color: #22c55e !important; }
+  .bg-indigo-500 { background-color: #6366f1 !important; }
+  .bg-blue-500 { background-color: #3b82f6 !important; }
+  .bg-yellow-400 { background-color: #facc15 !important; }
+  .bg-green-600 { background-color: #16a34a !important; }
+  .bg-red-600 { background-color: #dc2626 !important; }
+  .bg-green-400 { background-color: #4ade80 !important; }
+  .bg-yellow-500 { background-color: #eab308 !important; }
+  .bg-blue-600 { background-color: #2563eb !important; }
+  
+  /* Ensure liquid glass effects are visible in PDF */
+  .backdrop-blur-md {
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  /* Fallback: If gradients don't work, use solid dark background */
+  @supports not (background: linear-gradient(135deg, #0f172a, #581c87)) {
+    body, #root, .print-container {
+      background: #1e293b !important; /* Dark slate background as fallback */
+      background-color: #1e293b !important;
+    }
+  }
+  
+  /* Force backgrounds on specific elements */
+  .bg-white\/10 {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .bg-white\/5 {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+  
+  /* Page break controls */
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-after {
+    page-break-after: always;
+  }
+  
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+  
+  /* Optimize timeline for print */
+  .timeline-project {
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Reduce spacing to fit more content */
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .py-8 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  .mb-12 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .mb-8 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Hide decorative elements that don't work well in PDF */
+  .pointer-events-none {
+    display: none !important;
+  }
+  
+  /* Optimize text sizes for print */
+  .text-5xl {
+    font-size: 2.5rem !important;
+  }
+  
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.8rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Ensure all content is included */
+  .relative {
+    position: static !important;
+  }
+  
+  /* Make sure grid layouts work in print */
+  .grid {
+    display: block !important;
+  }
+  
+  .lg\\:grid-cols-2 > * {
+    width: 100% !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  /* Force show all projects */
+  .project-timeline {
+    display: block !important;
+  }
+  
+  /* Remove transform that might cause issues */
+  .transform {
+    transform: none !important;
+  }
+}
+
+/* PDF-specific layout adjustments */
+@page {
+  size: A4;
+  margin: 0.7in 0.5in;
+}
+
+/* Print button styles */
+.print-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.print-button:hover {
+  background: rgba(37, 99, 235, 0.9);
+  transform: translateY(-2px);
+}
+
+@media print {
+  .print-button {
+    display: none !important;
+  }
+  
+  .print-instructions {
+    display: none !important;
+  }
+}

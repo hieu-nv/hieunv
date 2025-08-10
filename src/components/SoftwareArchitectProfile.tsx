@@ -1,5 +1,6 @@
 import React from "react";
 import LiquidGlass from "./LiquidGlass";
+import "../styles/print.css";
 
 interface Skill {
   name: string;
@@ -36,12 +37,40 @@ interface SoftwareArchitectProfileProps {
 
 const defaultSkills: Skill[] = [
   {
+    name: "C#",
+    category: "language",
+    level: 98,
+    icon: "#️⃣",
+    color: "bg-indigo-500",
+  },
+  {
     name: "Java",
     category: "language",
     level: 90,
     icon: "☕",
     color: "bg-orange-500",
   },
+  {
+    name: "TypeScript",
+    category: "language",
+    level: 95,
+    icon: "🔷",
+    color: "bg-blue-500",
+  },
+  {
+    name: "JavaScript",
+    category: "language",
+    level: 92,
+    icon: "🟨",
+    color: "bg-yellow-400",
+  },
+  {
+    name: "Python",
+    category: "language",
+    level: 85,
+    icon: "🐍",
+    color: "bg-green-600",
+  },  
   {
     name: "React",
     category: "frontend",
@@ -55,6 +84,13 @@ const defaultSkills: Skill[] = [
     level: 88,
     icon: "🅰️",
     color: "bg-red-500",
+  },
+  {
+    name: "Vue.js",
+    category: "frontend",
+    level: 82,
+    icon: "💚",
+    color: "bg-green-400",
   },
   {
     name: "ASP.NET Core",
@@ -71,18 +107,11 @@ const defaultSkills: Skill[] = [
     color: "bg-green-500",
   },
   {
-    name: "C#",
-    category: "language",
-    level: 98,
-    icon: "#️⃣",
-    color: "bg-indigo-500",
-  },
-  {
-    name: "TypeScript",
-    category: "language",
-    level: 95,
-    icon: "🔷",
-    color: "bg-blue-500",
+    name: "Spring MVC",
+    category: "backend",
+    level: 85,
+    icon: "🌱",
+    color: "bg-green-600",
   },
   {
     name: "AWS",
@@ -232,6 +261,77 @@ const defaultProjects: Project[] = [
     type: "enterprise",
     icon: "💰",
   },
+  {
+    id: "7",
+    title: "K",
+    company: "FPT",
+    period: "2014 - 2016",
+    description:
+      "Architected and developed a comprehensive cloud services management portal enabling companies to register, manage, and monitor their cloud services. The solution included a multi-tenant registration portal for companies to onboard cloud services, an administrative website for managing registered companies and their service information, and an intelligent monitoring system with automated email notifications for service errors. I led the technical architecture decisions, implemented Spring MVC-based backend with RESTful APIs, designed responsive frontend interfaces using Backbone.js for both customer and admin portals, and established comprehensive testing strategies including automated UI testing with Geb framework. Additionally, I managed code review processes and mentoring programs for development team members. The system featured role-based access control, service health dashboards, automated alerting mechanisms, and comprehensive audit logging.",
+    technologies: [
+      "Java",
+      "Spring MVC",
+      "JavaScript",
+      "Backbone.js",
+      "Geb",
+      "Groovy",
+      "PostgreSQL",
+      "Couchbase",
+      "HTML5",
+      "CSS3",
+      "Maven",
+    ],
+    achievements: [
+      "Successfully onboarded 200+ companies with their cloud services",
+      "Achieved 99.9% uptime for critical monitoring and notification systems",
+      "Implemented comprehensive automation testing suite using Geb framework",
+      "Led code reviews and mentored 8 developers on best practices",
+    ],
+    type: "enterprise",
+    icon: "☁️",
+  },
+  {
+    id: "8",
+    title: "V",
+    company: "VTC",
+    period: "2012 - 2014",
+    description:
+      "Architected and developed a comprehensive online video streaming platform with advanced video processing capabilities. The system included custom video encoding tools for optimizing content delivery, automated web crawling tools for video content aggregation, and a scalable streaming infrastructure supporting thousands of concurrent users. I designed the load balancing architecture to distribute streaming traffic efficiently across multiple servers, implemented SSD-based storage solutions to handle high-volume video data and resolve storage bottlenecks, and established video transcoding pipelines for multi-format support. The platform featured adaptive bitrate streaming, real-time analytics, content management systems, and robust CDN integration for global content delivery.",
+    technologies: [
+      "Python",
+      "Tornado",
+      "FFmpeg",
+      "JavaScript",
+      "HTML5",
+      "MySQL",
+      "Memcached",
+    ],
+    achievements: [
+      "Successfully streamed to 10,000+ concurrent users with minimal latency",
+      "Implemented SSD storage solution reducing video load times by 75%",
+      "Built automated video encoding pipeline processing 500+ hours daily",
+      "Achieved 99.8% uptime through robust load balancing architecture",
+    ],
+    type: "enterprise",
+    icon: "🎬",
+  },
+  {
+    id: "9",
+    title: "H",
+    company: "H",
+    period: "2011 - 2012",
+    description:
+      "Developed an advanced image authenticity verification system using Wavelet Transformation algorithms to detect digitally manipulated images. The application employed sophisticated mathematical analysis to identify artifacts and inconsistencies in digital images that indicate forgery or tampering. I implemented core wavelet decomposition algorithms, designed pattern recognition systems for detecting manipulation signatures, and created a user-friendly interface for forensic analysts and security professionals. The system featured batch processing capabilities, detailed analysis reports, and integration with existing digital forensics workflows. This research-based project contributed to digital security and media authentication technologies.",
+    technologies: ["C#", "C++", "Paint.NET"],
+    achievements: [
+      "Achieved 95% accuracy in detecting digitally manipulated images",
+      "Implemented custom wavelet transformation algorithms for forensic analysis",
+      "Processed and analyzed 10,000+ images for validation and testing",
+      "Published research findings on digital image authentication methods",
+    ],
+    type: "enterprise",
+    icon: "🔍",
+  },
 ];
 
 const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
@@ -337,7 +437,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
         <div className="absolute left-6 top-[41px] w-4 h-4 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 border-2 border-slate-900 shadow-lg" />
 
         {/* Project Card */}
-        <div className="ml-16 mb-8">
+        <div className="ml-16 mb-8 timeline-project page-break-inside-avoid">
           <div className="relative rounded-2xl overflow-hidden">
             {/* Liquid Glass Background */}
             <div className="absolute inset-0 z-0">
@@ -432,7 +532,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
   };
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full min-h-screen print-container">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse" />
@@ -543,11 +643,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
                   Architecture Philosophy
                 </h3>
                 <p className="text-white/90 text-sm leading-relaxed font-medium text-left">
-                  "Building scalable, resilient systems that bridge business
-                  needs with technical excellence. I am passionate about clean
-                  architecture, microservices, and cloud-native solutions that
-                  deliver exceptional user experiences while maintaining
-                  operational efficiency."
+                  "With over 13 years of experience spanning enterprise applications, cloud platforms, and cutting-edge technologies, I architect solutions that balance innovation with pragmatism. My approach centers on domain-driven design, polyglot persistence, and technology-agnostic patterns that adapt to evolving business needs. From video streaming platforms and image processing systems to modern microservices and AI-enhanced applications, I believe in building robust, scalable architectures that not only solve today's challenges but anticipate tomorrow's opportunities. Every system I design prioritizes maintainability, performance, and the developer experience that drives long-term success."
                 </p>
               </div>
             </div>
