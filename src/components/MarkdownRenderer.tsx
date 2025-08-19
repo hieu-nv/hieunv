@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
-import 'highlight.js/styles/github-dark.css';
-import '../styles/markdown.scss';
+import React from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github-dark.css";
+import "../styles/markdown.scss";
 
 interface MarkdownRendererProps {
   content: string;
@@ -54,50 +54,55 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
           ),
           code: (props) => {
             const { className, children } = props;
-            const match = /language-(\w+)/.exec(className || '');
+            const match = /language-(\w+)/.exec(className || "");
             const inline = !match;
             return !inline && match ? (
               <div className="relative my-6 group">
-                {/* Language label with TypeScript-specific styling */}
+                {/* Language label with improved glassmorphism styling */}
                 {match && (
-                  <div className={`absolute top-0 right-0 z-10 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg backdrop-blur-sm border-l border-b ${
-                    match[1].toLowerCase() === 'typescript' || match[1].toLowerCase() === 'tsx' || match[1].toLowerCase() === 'ts' 
-                      ? 'bg-blue-600/90 border-blue-400/30' 
-                      : match[1].toLowerCase() === 'javascript' || match[1].toLowerCase() === 'jsx' || match[1].toLowerCase() === 'js'
-                      ? 'bg-yellow-600/90 border-yellow-400/30'
-                      : 'bg-purple-600/90 border-purple-400/30'
-                  }`}>
-                    {match[1].toLowerCase() === 'typescript' ? 'TypeScript' : 
-                     match[1].toLowerCase() === 'tsx' ? 'TSX' :
-                     match[1].toLowerCase() === 'ts' ? 'TS' :
-                     match[1].toLowerCase() === 'javascript' ? 'JavaScript' :
-                     match[1].toLowerCase() === 'jsx' ? 'JSX' :
-                     match[1].toLowerCase() === 'js' ? 'JS' :
-                     match[1].toUpperCase()}
+                  <div className="absolute top-0 right-0 z-20 text-white/90 text-xs font-semibold px-3 py-1.5 rounded-bl-xl rounded-tr-xl backdrop-blur-md bg-black/30 border-l border-b border-white/30 shadow-lg">
+                    {match[1].toLowerCase() === "typescript"
+                      ? "TypeScript"
+                      : match[1].toLowerCase() === "tsx"
+                      ? "TSX"
+                      : match[1].toLowerCase() === "ts"
+                      ? "TS"
+                      : match[1].toLowerCase() === "javascript"
+                      ? "JavaScript"
+                      : match[1].toLowerCase() === "jsx"
+                      ? "JSX"
+                      : match[1].toLowerCase() === "js"
+                      ? "JS"
+                      : match[1].toUpperCase()}
                   </div>
                 )}
-                <pre className="bg-gradient-to-br from-gray-900/90 via-blue-900/20 to-purple-900/30 backdrop-blur-xl border-2 border-white/30 rounded-xl p-6 overflow-x-auto shadow-2xl relative text-left">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-purple-500/5 rounded-xl"></div>
-                  <code 
-                    className={`${className} text-sm leading-relaxed block text-left relative z-10`} 
-                    style={{ 
-                      fontFamily: "'JetBrains Mono', 'Fira Code', 'Monaco', 'Cascadia Code', 'SF Mono', 'Roboto Mono', monospace",
-                      fontSize: '14px',
-                      lineHeight: '1.7',
-                      textAlign: 'left',
-                      whiteSpace: 'pre',
-                      tabSize: '2'
-                    }}
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                </pre>
+
+                {/* Content overlay with full backdrop */}
+                <div className="relative z-10 bg-black/20 backdrop-blur-md border-2 border-white/40 rounded-xl shadow-2xl overflow-hidden">
+                  <pre className="p-6 overflow-x-auto text-left m-0 bg-transparent">
+                    <code
+                      className={`${className} text-sm leading-relaxed block text-left relative z-10`}
+                      style={{
+                        fontFamily:
+                          "'JetBrains Mono', 'Fira Code', 'Monaco', 'Cascadia Code', 'SF Mono', 'Roboto Mono', monospace",
+                        fontSize: "14px",
+                        lineHeight: "1.7",
+                        textAlign: "left",
+                        whiteSpace: "pre",
+                        tabSize: "2",
+                      }}
+                      {...props}
+                    >
+                      {children}
+                    </code>
+                  </pre>
+                </div>
+
                 {/* Copy button overlay */}
-                <button 
-                  className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-white/10 hover:bg-white/20 text-white p-2 rounded-md backdrop-blur-sm border border-white/20 text-xs"
+                <button
+                  className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity bg-white/10 hover:bg-white/20 text-white p-2 rounded-md backdrop-blur-sm border border-white/20 text-xs"
                   onClick={() => {
-                    if (typeof children === 'string') {
+                    if (typeof children === "string") {
                       navigator.clipboard.writeText(children);
                     }
                   }}
@@ -107,12 +112,13 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
                 </button>
               </div>
             ) : (
-              <code 
-                className="bg-gradient-to-r from-blue-900/60 to-purple-900/60 backdrop-blur-sm px-2.5 py-1 rounded-lg text-sm font-mono text-blue-100 border border-blue-400/40 shadow-sm hover:shadow-md transition-shadow" 
-                style={{ 
-                  fontFamily: "'Fira Code', 'JetBrains Mono', 'Monaco', monospace",
-                  fontSize: '13px',
-                  fontWeight: '500'
+              <code
+                className="bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded-lg text-sm font-mono text-white/90 border border-white/40 shadow-sm hover:shadow-md transition-shadow"
+                style={{
+                  fontFamily:
+                    "'Fira Code', 'JetBrains Mono', 'Monaco', monospace",
+                  fontSize: "13px",
+                  fontWeight: "500",
                 }}
                 {...props}
               >
@@ -139,11 +145,11 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
             <li className="ml-4 text-white/85">{children}</li>
           ),
           a: ({ href, children }) => (
-            <a 
-              href={href} 
+            <a
+              href={href}
               className="text-blue-300 hover:text-blue-200 hover:underline font-medium drop-shadow-sm transition-colors"
-              target={href?.startsWith('http') ? '_blank' : undefined}
-              rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              target={href?.startsWith("http") ? "_blank" : undefined}
+              rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
             >
               {children}
             </a>
