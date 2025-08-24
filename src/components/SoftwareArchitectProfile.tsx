@@ -70,7 +70,7 @@ const defaultSkills: Skill[] = [
     level: 85,
     icon: "🐍",
     color: "bg-green-600",
-  },  
+  },
   {
     name: "React",
     category: "frontend",
@@ -177,8 +177,8 @@ const defaultProjects: Project[] = [
     description:
       "Designed the overall system architecture using a microservices-based approach with Spring Boot, Node.js, and AWS Lambda. I defined service boundaries, selected core technologies such as Angular for the frontend, MongoDB and MariaDB for databases, and AWS services (API Gateway, S3, ECS) for cloud infrastructure. I ensured the system's scalability, security, and maintainability by implementing best practices like JWT authentication, SAML2 SSO, and CI/CD pipelines using GitLab CI. Additionally, I collaborated with cross-functional teams to establish coding standards, created detailed architectural documentation, and provided technical leadership throughout the development lifecycle.",
     technologies: [
-      "Angular",
       "TypeScript",
+      "Angular",
       "JavaScript",
       "Vue",
       "Java",
@@ -224,8 +224,8 @@ const defaultProjects: Project[] = [
       "Java",
       "Android",
       "iOS",
-      "HTML5",
-      "CSS3",
+      "TypeScript",
+      "Angular",
       "SQL Server",
     ],
     achievements: [
@@ -643,7 +643,18 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
                   Architecture Philosophy
                 </h3>
                 <p className="text-white/90 text-sm leading-relaxed font-medium text-left">
-                  "With over 13 years of experience spanning enterprise applications, cloud platforms, and cutting-edge technologies, I architect solutions that balance innovation with pragmatism. My approach centers on domain-driven design, polyglot persistence, and technology-agnostic patterns that adapt to evolving business needs. From video streaming platforms and image processing systems to modern microservices and AI-enhanced applications, I believe in building robust, scalable architectures that not only solve today's challenges but anticipate tomorrow's opportunities. Every system I design prioritizes maintainability, performance, and the developer experience that drives long-term success."
+                  "With over 13 years of experience spanning enterprise
+                  applications, cloud platforms, and cutting-edge technologies,
+                  I architect solutions that balance innovation with pragmatism.
+                  My approach centers on domain-driven design, polyglot
+                  persistence, and technology-agnostic patterns that adapt to
+                  evolving business needs. From video streaming platforms and
+                  image processing systems to modern microservices and
+                  AI-enhanced applications, I believe in building robust,
+                  scalable architectures that not only solve today's challenges
+                  but anticipate tomorrow's opportunities. Every system I design
+                  prioritizes maintainability, performance, and the developer
+                  experience that drives long-term success."
                 </p>
               </div>
             </div>

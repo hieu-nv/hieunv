@@ -10,12 +10,58 @@ const markdownModules = import.meta.glob('../docs/*.md', {
   import: 'default' 
 });
 
+// Function to extract tags from markdown content
+const extractTags = (content: string, docSlug: string): string[] => {
+  const tags: string[] = [];
+  
+  // Add document-specific tags based on filename
+  const documentTags: Record<string, string[]> = {
+    'index': ['documentation', 'overview', 'getting-started'],
+    'components': ['react', 'components', 'ui', 'typescript'],
+    'api-reference': ['api', 'reference', 'methods', 'endpoints'],
+    'getting-started': ['tutorial', 'setup', 'beginner', 'guide'],
+    'styling-guide': ['css', 'sass', 'tailwind', 'design', 'styling'],
+    'header-examples': ['headers', 'examples', 'markdown', 'formatting'],
+    'PDF_GENERATION_GUIDE': ['pdf', 'generation', 'export', 'print'],
+    'README': ['readme', 'documentation', 'system'],
+    'this-code-review-comment-made-me-quit-and-id-write-it-again': ['code-review', 'career', 'experience', 'story']
+  };
+  
+  // Add predefined tags for this document
+  if (documentTags[docSlug]) {
+    tags.push(...documentTags[docSlug]);
+  }
+  
+  // Extract tags from content patterns
+  const contentLower = content.toLowerCase();
+  
+  // Technology tags
+  if (contentLower.includes('react')) tags.push('react');
+  if (contentLower.includes('typescript') || contentLower.includes('tsx')) tags.push('typescript');
+  if (contentLower.includes('vite')) tags.push('vite');
+  if (contentLower.includes('tailwind')) tags.push('tailwindcss');
+  if (contentLower.includes('scss') || contentLower.includes('sass')) tags.push('scss');
+  if (contentLower.includes('markdown')) tags.push('markdown');
+  if (contentLower.includes('pdf')) tags.push('pdf');
+  if (contentLower.includes('javascript') || contentLower.includes('js')) tags.push('javascript');
+  
+  // Content type tags
+  if (contentLower.includes('tutorial') || contentLower.includes('guide')) tags.push('tutorial');
+  if (contentLower.includes('example')) tags.push('examples');
+  if (contentLower.includes('documentation')) tags.push('documentation');
+  if (contentLower.includes('reference')) tags.push('reference');
+  
+  // Remove duplicates and return
+  return [...new Set(tags)];
+};
+
 const DocPage: React.FC = () => {
   const { slug } = useParams<{ slug?: string }>();
   const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [availableDocs, setAvailableDocs] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   // Get the current document slug or default to 'index'
   const currentSlug = slug || 'index';
@@ -45,6 +91,10 @@ const DocPage: React.FC = () => {
 
         const markdownContent = await loadModule();
         setContent(markdownContent as string);
+        
+        // Extract and set tags
+        const extractedTags = extractTags(markdownContent as string, currentSlug);
+        setTags(extractedTags);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load document');
         console.error('Error loading markdown:', err);
@@ -174,6 +224,28 @@ const DocPage: React.FC = () => {
               {/* Content overlay */}
               <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
                 <MarkdownRenderer content={content} />
+                
+                {/* Tags Section */}
+                {tags.length > 0 && (
+                  <div className="mt-12 pt-8 border-t border-gray-200/30 dark:border-gray-700/30">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                      Tags
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
+                                   bg-blue-100/80 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300
+                                   border border-blue-200/50 dark:border-blue-700/50
+                                   hover:bg-blue-200/80 dark:hover:bg-blue-800/40 transition-colors"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </main>

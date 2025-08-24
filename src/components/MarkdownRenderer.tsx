@@ -127,22 +127,22 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
             );
           },
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-blue-400 pl-4 py-3 my-4 bg-white/10 backdrop-blur-sm rounded-r-lg italic text-white/90 shadow-lg">
+            <blockquote className="border-l-4 border-blue-400 p-4 my-4 bg-white/10 backdrop-blur-sm rounded-lg italic text-white/90 shadow-lg">
               {children}
             </blockquote>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc list-inside mb-4 space-y-2 text-white/85 drop-shadow-sm">
+            <ul className="list-disc list-outside mb-4 space-y-2 text-white/85 drop-shadow-sm pl-6">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal list-inside mb-4 space-y-2 text-white/85 drop-shadow-sm">
+            <ol className="list-decimal list-outside mb-4 space-y-2 text-white/85 drop-shadow-sm pl-6">
               {children}
             </ol>
           ),
           li: ({ children }) => (
-            <li className="ml-4 text-white/85">{children}</li>
+            <li className="text-white/85 leading-relaxed">{children}</li>
           ),
           a: ({ href, children }) => (
             <a
