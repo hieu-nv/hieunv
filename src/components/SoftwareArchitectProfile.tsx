@@ -1,5 +1,4 @@
 import React from "react";
-import LiquidGlass from "./LiquidGlass";
 import "../styles/print.css";
 
 interface Skill {
@@ -355,21 +354,23 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
   console.log("Projects length:", projects.length);
 
   const SkillBar: React.FC<{ skill: Skill }> = ({ skill }) => (
-    <div className="mb-3">
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-sm font-medium text-white/90 flex items-center gap-2">
-          <span className="text-lg">{skill.icon}</span>
+    <div className="group">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-slate-800 font-semibold flex items-center gap-3">
+          <span className="text-xl">{skill.icon}</span>
           {skill.name}
         </span>
-        <span className="text-xs text-white/70 font-medium">
+        <span className="text-sm text-slate-600 font-bold bg-slate-100 px-2 py-1 rounded-full">
           {skill.level}%
         </span>
       </div>
-      <div className="w-full bg-white/20 rounded-full h-2">
+      <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
         <div
-          className={`h-2 rounded-full ${skill.color} transition-all duration-1000 ease-out shadow-sm`}
+          className={`h-3 rounded-full transition-all duration-1000 ease-out shadow-sm ${skill.color} relative overflow-hidden`}
           style={{ width: `${skill.level}%` }}
-        />
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
+        </div>
       </div>
     </div>
   );
@@ -379,17 +380,17 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
     text: string;
     href?: string;
   }> = ({ icon, text, href }) => (
-    <div className="flex items-center gap-2 mb-2 relative z-10">
-      <span className="text-blue-400 text-lg">{icon}</span>
+    <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+      <span className="text-2xl">{icon}</span>
       {href ? (
         <a
           href={href}
-          className="text-sm text-white/90 hover:text-blue-300 transition-colors font-medium"
+          className="text-slate-700 hover:text-blue-600 transition-colors font-medium group-hover:underline"
         >
           {text}
         </a>
       ) : (
-        <span className="text-sm text-white/80 font-medium">{text}</span>
+        <span className="text-slate-700 font-medium">{text}</span>
       )}
     </div>
   );
@@ -430,100 +431,77 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
     return (
       <div className="relative">
         {/* Timeline Line */}
-
-        <div className="absolute left-[31px] top-0 w-0.5 h-full bg-gradient-to-b from-blue-400 to-purple-400 opacity-30" />
+        <div className="absolute left-[31px] top-0 w-0.5 h-full bg-gray-300" />
 
         {/* Timeline Dot */}
-        <div className="absolute left-6 top-[41px] w-4 h-4 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 border-2 border-slate-900 shadow-lg" />
+        <div className="absolute left-6 top-[41px] w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow-lg" />
 
         {/* Project Card */}
         <div className="ml-16 mb-8 timeline-project page-break-inside-avoid">
-          <div className="relative rounded-2xl overflow-hidden">
-            {/* Liquid Glass Background */}
-            <div className="absolute inset-0 z-0">
-              <LiquidGlass
-                width={400}
-                height={200}
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "16px",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
-
-            {/* Content overlay */}
-            <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              {/* Header */}
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{project.icon}</span>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white">
-                      {project.title}
-                    </h4>
-                    <p className="text-blue-300 text-sm font-medium">
-                      {project.company}
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right h-12">
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-medium text-white ${getTypeColor(
-                      project.type
-                    )}`}
-                  >
-                    {getTypeLabel(project.type)}
-                  </span>
-                  <p className="text-purple-300 text-sm mt-1">
-                    {project.period}
+          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            {/* Header */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{project.icon}</span>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    {project.title}
+                  </h4>
+                  <p className="text-blue-600 text-sm font-medium">
+                    {project.company}
                   </p>
                 </div>
               </div>
-
-              {/* Description */}
-              <p className="text-white/90 text-sm leading-relaxed mb-4 text-justify">
-                {project.description}
-              </p>
-
-              {/* Technologies */}
-              <div className="mb-4">
-                <h5 className="text-sm font-medium text-white/80 mb-2 text-left">
-                  Technologies Used:
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-2 py-1 bg-white/20 rounded-md text-xs text-white/90 font-medium backdrop-blur-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div className="text-right h-12">
+                <span
+                  className={`inline-block px-3 py-1 rounded-full text-xs font-medium text-white ${getTypeColor(
+                    project.type
+                  )}`}
+                >
+                  {getTypeLabel(project.type)}
+                </span>
+                <p className="text-slate-700 text-sm mt-1">{project.period}</p>
               </div>
+            </div>
 
-              {/* Achievements */}
-              <div>
-                <h5 className="text-sm font-medium text-white/80 mb-2 text-left">
-                  Key Achievements:
-                </h5>
-                <ul className="space-y-1">
-                  {project.achievements.map((achievement, achIndex) => (
-                    <li
-                      key={achIndex}
-                      className="text-xs text-white/80 flex items-start gap-2"
-                    >
-                      <span className="text-green-400 mt-0.5">✓</span>
-                      {achievement}
-                    </li>
-                  ))}
-                </ul>
+            {/* Description */}
+            <p className="text-slate-800 text-sm leading-relaxed mb-4 text-justify">
+              {project.description}
+            </p>
+
+            {/* Technologies */}
+            <div className="mb-4">
+              <h5 className="text-sm font-medium text-slate-800 mb-2 text-left">
+                Technologies Used:
+              </h5>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="px-2 py-1 bg-slate-100 border border-slate-300 rounded-md text-xs text-slate-800 font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
+            </div>
+
+            {/* Achievements */}
+            <div>
+              <h5 className="text-sm font-medium text-slate-800 mb-2 text-left">
+                Key Achievements:
+              </h5>
+              <ul className="space-y-1">
+                {project.achievements.map((achievement, achIndex) => (
+                  <li
+                    key={achIndex}
+                    className="text-xs text-slate-700 flex items-start gap-2"
+                  >
+                    <span className="text-green-500 mt-0.5">✓</span>
+                    {achievement}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -533,164 +511,104 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
 
   return (
     <div className="relative w-full min-h-screen print-container">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
-
-      {/* Grid Pattern Overlay */}
-      <div className="fixed inset-0 opacity-5 pointer-events-none">
-        <div className="grid grid-cols-12 gap-4 h-full">
-          {Array.from({ length: 144 }, (_, i) => (
-            <div key={i} className="border border-white/20" />
-          ))}
-        </div>
+      {/* Modern geometric background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-indigo-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-purple-400/10 to-pink-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-bl from-cyan-400/10 to-blue-500/10 rounded-full blur-2xl" />
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 flex items-center justify-center py-16 p-8">
-        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl w-full grid grid-cols-1 xl:grid-cols-2 gap-16 items-center">
           {/* Left Side - Profile Info */}
-          <div className="space-y-8">
+          <div className="space-y-10">
             {/* Header */}
-            <div className="text-center lg:text-left">
-              <div className="inline-block relative mb-6">
-                <img
-                  src={avatar}
-                  alt={name}
-                  className="w-32 h-32 lead rounded-full border-4 border-white/20 shadow-2xl"
-                />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-400/20 to-purple-400/20" />
+            <div className="text-center xl:text-left">
+              <div className="inline-block relative mb-8">
+                <div className="relative">
+                  <img
+                    src={avatar}
+                    alt={name}
+                    className="w-50 h-50 rounded-[200px] border-4 border-white/50 shadow-2xl object-cover"
+                  />
+                </div>
               </div>
-              <h1 className="text-4xl lg:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent leading-normal">
-                {name}
-              </h1>
-              <h2 className="text-xl text-blue-300 mb-2">{title}</h2>
-              <p className="text-purple-300 font-medium">{experience}</p>
-            </div>
-
-            {/* Contact Information with Liquid Glass Background */}
-            <div className="relative rounded-2xl overflow-hidden">
-              {/* Liquid Glass Background */}
-              <div className="absolute inset-0 z-0">
-                <LiquidGlass
-                  width={400}
-                  height={200}
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    left: "0",
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "16px",
-                    pointerEvents: "none",
-                  }}
-                />
-              </div>
-
-              {/* Content overlay */}
-              <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">📧</span>
-                  Contact Information
-                </h3>
-                <div className="space-y-2">
-                  <ContactInfo icon="📍" text={location} />
-                  <ContactInfo
-                    icon="✉️"
-                    text={email}
-                    href={`mailto:${email}`}
-                  />
-                  <ContactInfo
-                    icon="💼"
-                    text={linkedin}
-                    href={`https://${linkedin}`}
-                  />
-                  <ContactInfo
-                    icon="🐙"
-                    text={github}
-                    href={`https://${github}`}
-                  />
+              <div className="space-y-3">
+                <h1 className="text-5xl xl:text-6xl font-bold text-slate-900 leading-tight tracking-tight">
+                  {name}
+                </h1>
+                <h2 className="text-2xl font-semibold text-blue-600">
+                  {title}
+                </h2>
+                <p className="text-lg text-slate-600 font-medium">
+                  {experience}
+                </p>
+                <div className="flex items-center justify-center xl:justify-start gap-2 text-slate-500">
+                  <span>📍</span>
+                  <span className="font-medium">{location}</span>
                 </div>
               </div>
             </div>
 
-            {/* Architecture Philosophy with Liquid Glass Background */}
-            <div className="relative rounded-2xl overflow-hidden">
-              {/* Liquid Glass Background */}
-              <div className="absolute inset-0 z-0">
-                <LiquidGlass
-                  width={400}
-                  height={180}
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    left: "0",
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "16px",
-                    pointerEvents: "none",
-                  }}
+            {/* Contact Information - Modern Card */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span className="text-2xl">📧</span>
+                Contact Information
+              </h3>
+              <div className="grid gap-4">
+                <ContactInfo icon="📍" text={location} />
+                <ContactInfo icon="✉️" text={email} href={`mailto:${email}`} />
+                <ContactInfo
+                  icon="💼"
+                  text={linkedin}
+                  href={`https://${linkedin}`}
+                />
+                <ContactInfo
+                  icon="🐙"
+                  text={github}
+                  href={`https://${github}`}
                 />
               </div>
+            </div>
 
-              {/* Content overlay */}
-              <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <span className="text-purple-400">🏗️</span>
-                  Architecture Philosophy
-                </h3>
-                <p className="text-white/90 text-sm leading-relaxed font-medium text-left">
-                  "With over 13 years of experience spanning enterprise
-                  applications, cloud platforms, and cutting-edge technologies,
-                  I architect solutions that balance innovation with pragmatism.
-                  My approach centers on domain-driven design, polyglot
-                  persistence, and technology-agnostic patterns that adapt to
-                  evolving business needs. From video streaming platforms and
-                  image processing systems to modern microservices and
-                  AI-enhanced applications, I believe in building robust,
-                  scalable architectures that not only solve today's challenges
-                  but anticipate tomorrow's opportunities. Every system I design
-                  prioritizes maintainability, performance, and the developer
-                  experience that drives long-term success."
-                </p>
-              </div>
+            {/* Architecture Philosophy - Modern Card */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span className="text-2xl">🏗️</span>
+                Architecture Philosophy
+              </h3>
+              <p className="text-slate-700 leading-relaxed text-justify">
+                "With over 14 years of experience spanning enterprise
+                applications, cloud platforms, and cutting-edge technologies, I
+                architect solutions that balance innovation with pragmatism. My
+                approach centers on domain-driven design, polyglot persistence,
+                and technology-agnostic patterns that adapt to evolving business
+                needs. From video streaming platforms and image processing
+                systems to modern microservices and AI-enhanced applications, I
+                believe in building robust, scalable architectures that not only
+                solve today's challenges but anticipate tomorrow's
+                opportunities. Every system I design prioritizes
+                maintainability, performance, and the developer experience that
+                drives long-term success."
+              </p>
             </div>
           </div>
 
           {/* Right Side - Skills */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white text-center lg:text-left mb-8">
+            <h3 className="text-2xl font-bold text-slate-800 text-center lg:text-left mb-8">
               Technical Expertise
             </h3>
 
-            {/* Programming Languages with Liquid Glass Background */}
-            <div className="relative rounded-2xl overflow-hidden">
-              {/* Liquid Glass Background */}
-              <div className="absolute inset-0 z-0">
-                <LiquidGlass
-                  width={400}
-                  height={160}
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    left: "0",
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "16px",
-                    pointerEvents: "none",
-                  }}
-                />
-              </div>
-
-              {/* Content overlay */}
-              <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <span className="text-yellow-400">👨‍💻</span>
-                  Programming Languages
-                </h4>
+            {/* Programming Languages */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span className="text-2xl">👨‍💻</span>
+                Programming Languages
+              </h4>
+              <div className="space-y-4">
                 {getSkillsByCategory("language").map((skill, index) => (
                   <SkillBar key={index} skill={skill} />
                 ))}
@@ -698,47 +616,55 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
             </div>
 
             {/* Frontend Technologies */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-blue-400">🎨</span>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span className="text-2xl">🎨</span>
                 Frontend Technologies
               </h4>
-              {getSkillsByCategory("frontend").map((skill, index) => (
-                <SkillBar key={index} skill={skill} />
-              ))}
+              <div className="space-y-4">
+                {getSkillsByCategory("frontend").map((skill, index) => (
+                  <SkillBar key={index} skill={skill} />
+                ))}
+              </div>
             </div>
 
             {/* Backend Technologies */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-green-400">⚙️</span>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span className="text-2xl">⚙️</span>
                 Backend Technologies
               </h4>
-              {getSkillsByCategory("backend").map((skill, index) => (
-                <SkillBar key={index} skill={skill} />
-              ))}
+              <div className="space-y-4">
+                {getSkillsByCategory("backend").map((skill, index) => (
+                  <SkillBar key={index} skill={skill} />
+                ))}
+              </div>
             </div>
 
-            {/* Cloud Infrastructure */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="text-cyan-400">☁️</span>
-                Cloud Infrastructure
+            {/* Cloud Technologies */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span className="text-2xl">☁️</span>
+                Cloud Technologies
               </h4>
-              {getSkillsByCategory("cloud").map((skill, index) => (
-                <SkillBar key={index} skill={skill} />
-              ))}
+              <div className="space-y-4">
+                {getSkillsByCategory("cloud").map((skill, index) => (
+                  <SkillBar key={index} skill={skill} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="relative z-10 py-8 text-center">
+      <div className="relative z-10 py-12 text-center">
         <div className="animate-bounce">
-          <span className="text-white/50 text-2xl">⬇️</span>
-          <p className="text-white/70 text-sm mt-2">
-            Scroll down for Project Timeline
+          <div className="w-12 h-12 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl shadow-lg">
+            ⬇️
+          </div>
+          <p className="text-slate-600 text-lg font-medium">
+            Explore Project Timeline
           </p>
         </div>
       </div>
@@ -747,10 +673,8 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
       <div className="relative z-10 py-16 px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Projects
-            </h3>
-            <p className="text-white/70 max-w-2xl mx-auto">
+            <h3 className="text-3xl font-bold mb-4 text-slate-900">Projects</h3>
+            <p className="text-slate-700 max-w-2xl mx-auto">
               A showcase of key projects and achievements throughout my career
               as a software architect, highlighting technical leadership and
               innovative solutions.
@@ -763,7 +687,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
                 <ProjectCard key={project.id} project={project} index={index} />
               ))
             ) : (
-              <div className="text-white text-center p-8">
+              <div className="text-slate-800 text-center p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20">
                 <p>No projects found. Check console for debugging info.</p>
               </div>
             )}

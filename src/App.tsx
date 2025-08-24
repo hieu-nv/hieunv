@@ -27,12 +27,13 @@ function HomePage() {
   return (
     <div className="relative">
       {/* Navigation */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-6 right-6 z-50">
         <Link
           to="/docs"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-lg transition-colors font-medium"
+          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-2xl shadow-2xl transition-all duration-300 font-semibold text-sm flex items-center gap-2 backdrop-blur-sm border border-white/20"
         >
-          📚 Documentation
+          <span className="text-lg">📚</span>
+          Documentation
         </Link>
       </div>
       
