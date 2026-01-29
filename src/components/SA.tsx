@@ -21,7 +21,7 @@ interface Project {
   icon: string;
 }
 
-interface SoftwareArchitectProfileProps {
+interface SAProps {
   name?: string;
   title?: string;
   experience?: string;
@@ -45,7 +45,7 @@ const defaultSkills: Skill[] = [
   {
     name: "Java",
     category: "language",
-    level: 90,
+    level: 95,
     icon: "☕",
     color: "bg-orange-500",
   },
@@ -66,7 +66,7 @@ const defaultSkills: Skill[] = [
   {
     name: "Python",
     category: "language",
-    level: 85,
+    level: 82,
     icon: "🐍",
     color: "bg-green-600",
   },
@@ -80,42 +80,56 @@ const defaultSkills: Skill[] = [
   {
     name: "Angular",
     category: "frontend",
-    level: 88,
+    level: 90,
     icon: "🅰️",
     color: "bg-red-500",
   },
   {
     name: "Vue.js",
     category: "frontend",
-    level: 82,
+    level: 85,
     icon: "💚",
     color: "bg-green-400",
   },
   {
+    name: "jQuery",
+    category: "frontend",
+    level: 80,
+    icon: "💎",
+    color: "bg-cyan-500",
+  },
+  {
     name: "ASP.NET Core",
     category: "backend",
-    level: 95,
+    level: 98,
     icon: "🌐",
     color: "bg-purple-500",
   },
   {
     name: "Spring Boot",
     category: "backend",
-    level: 88,
+    level: 92,
     icon: "🍃",
     color: "bg-green-500",
   },
   {
     name: "Spring MVC",
     category: "backend",
-    level: 85,
+    level: 88,
     icon: "🌱",
     color: "bg-green-600",
   },
   {
+    name: "Unity",
+    category: "backend",
+    level: 85,
+    icon: "🎮",
+    color: "bg-gray-700",
+  },
+  {
     name: "AWS",
     category: "cloud",
-    level: 85,
+    level: 88,
     icon: "☁️",
     color: "bg-yellow-500",
   },
@@ -126,6 +140,13 @@ const defaultSkills: Skill[] = [
     icon: "🌤️",
     color: "bg-blue-600",
   },
+  {
+    name: "Docker",
+    category: "cloud",
+    level: 90,
+    icon: "🐳",
+    color: "bg-blue-400",
+  },
 ];
 
 const defaultProjects: Project[] = [
@@ -135,7 +156,7 @@ const defaultProjects: Project[] = [
     company: "FPT",
     period: "2025 - Present",
     description:
-      "Designed and implemented a modern, scalable multi-platform solution providing rental guarantee and communication services. My core responsibilities included architecting microservices using Azure Container Apps, designing feature-based frontend architecture with React 19/TypeScript, and implementing clean hexagonal architecture patterns with ASP.NET Core 9.0 APIs. I led technology stack decisions including Redux Toolkit for state management, Azure Communication Services for real-time chat, and Infrastructure as Code using Azure Bicep templates. Additionally, I established development standards for type safety, security-first design with Auth0 authentication, and comprehensive DevOps strategies including CI/CD pipelines and multi-environment deployments. My role ensured the system maintained enterprise-grade scalability, performance optimization, and WCAG 2.1 AA accessibility compliance across all applications.",
+      "Consulted on business solutions and digital marketing strategies for various clients, architecting scalable technology platforms to support modern marketing initiatives. My core responsibilities included designing microservices architectures using Azure Container Apps for marketing automation platforms, implementing feature-based frontend solutions with React 19/TypeScript for customer engagement portals, and developing clean hexagonal architecture patterns with ASP.NET Core 9.0 APIs for marketing data processing. I led technology stack decisions for digital marketing tools including Redux Toolkit for state management, Azure Communication Services for customer interaction systems, and Infrastructure as Code using Azure Bicep templates for scalable marketing infrastructure. Additionally, I established development standards for marketing analytics, implemented security-first design with Auth0 authentication for customer data protection, and created comprehensive DevOps strategies including CI/CD pipelines for rapid deployment of marketing campaigns and solutions.",
     technologies: [
       "C#",
       "ASP.NET Core",
@@ -333,7 +354,7 @@ const defaultProjects: Project[] = [
   },
 ];
 
-const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
+const SA: React.FC<SAProps> = ({
   name = "Hieu Nguyen",
   title = "Senior Software Architect",
   experience = "14+ Years Experience",
@@ -487,7 +508,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
             </div>
 
             {/* Achievements */}
-            <div>
+            {/* <div>
               <h5 className="text-sm font-medium text-slate-800 mb-2 text-left">
                 Key Achievements:
               </h5>
@@ -502,7 +523,7 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -573,25 +594,13 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
               </div>
             </div>
 
-            {/* Architecture Philosophy - Modern Card */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
               <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">🏗️</span>
-                Architecture Philosophy
+                <span className="text-2xl">👨‍💼</span>
+                Professional Overview
               </h3>
               <p className="text-slate-700 leading-relaxed text-justify">
-                "With over 14 years of experience spanning enterprise
-                applications, cloud platforms, and cutting-edge technologies, I
-                architect solutions that balance innovation with pragmatism. My
-                approach centers on domain-driven design, polyglot persistence,
-                and technology-agnostic patterns that adapt to evolving business
-                needs. From video streaming platforms and image processing
-                systems to modern microservices and AI-enhanced applications, I
-                believe in building robust, scalable architectures that not only
-                solve today's challenges but anticipate tomorrow's
-                opportunities. Every system I design prioritizes
-                maintainability, performance, and the developer experience that
-                drives long-term success."
+                "I am a seasoned Senior Software Architect with over 14 years of comprehensive experience in designing and implementing enterprise-scale solutions across diverse industries including digital marketing, fintech, gaming, video streaming, and cloud services. My expertise spans full-stack development, cloud architecture, and technical leadership, with proven success in consulting on business solutions and digital marketing strategies. I specialize in architecting scalable microservices, implementing modern frontend frameworks, and leading cross-functional development teams. Throughout my career, I have successfully delivered complex projects ranging from marketing automation platforms and pension management systems to video streaming platforms and image processing applications, consistently driving innovation while ensuring robust, maintainable, and high-performing solutions."
               </p>
             </div>
           </div>
@@ -706,4 +715,4 @@ const SoftwareArchitectProfile: React.FC<SoftwareArchitectProfileProps> = ({
   );
 };
 
-export default SoftwareArchitectProfile;
+export default SA;

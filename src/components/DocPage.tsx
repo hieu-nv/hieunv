@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MarkdownRenderer from "./MarkdownRenderer";
 import { formatDocTitle } from "../utils/docUtils";
 
-// Import all markdown files dynamically
-const markdownModules = import.meta.glob("../docs/*.md", {
+// Import all markdown files dynamically (recursive)
+const markdownModules = import.meta.glob("../docs/**/*.md", {
   query: "?raw",
   import: "default",
 });
@@ -64,21 +64,26 @@ const extractTags = (content: string, docSlug: string): string[] => {
 };
 
 const DocPage: React.FC = () => {
-  const { slug } = useParams<{ slug?: string }>();
+  const location = useLocation();
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [availableDocs, setAvailableDocs] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
-  // Get the current document slug or default to 'index'
-  const currentSlug = slug || "index";
+  // Get the current document slug from the path or default to 'index'
+  // Extract path after /docs/ and decode URL-encoded characters
+  const pathSegments = location.pathname.split('/docs/');
+  const currentSlug = pathSegments.length > 1 && pathSegments[1] 
+    ? decodeURIComponent(pathSegments[1]) 
+    : "index";
 
   useEffect(() => {
     // Get list of available documents
     const docNames = Object.keys(markdownModules)
       .map((path) => {
-        const match = path.match(/\/([^/]+)\.md$/);
+        // Extract path relative to docs folder, removing ../docs/ and .md extension
+        const match = path.match(/\.\.\/docs\/(.+)\.md$/);
         return match ? match[1] : "";
       })
       .filter(Boolean);
@@ -170,19 +175,23 @@ const DocPage: React.FC = () => {
                 Documentation
               </h2>
               <nav className="space-y-3">
-                {availableDocs.map((doc) => (
-                  <Link
-                    key={doc}
-                    to={`/docs/${doc}`}
-                    className={`block px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 ${
-                      currentSlug === doc
-                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg transform scale-105"
-                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-100/80 hover:transform hover:scale-102"
-                    }`}
-                  >
-                    {formatDocTitle(doc)}
-                  </Link>
-                ))}
+                {availableDocs.map((doc) => {
+                  // Encode each path segment separately for nested paths
+                  const encodedDoc = doc.split('/').map(segment => encodeURIComponent(segment)).join('/');
+                  return (
+                    <Link
+                      key={doc}
+                      to={`/docs/${encodedDoc}`}
+                      className={`block px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 ${
+                        currentSlug === doc
+                          ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg transform scale-105"
+                          : "text-slate-700 hover:text-slate-900 hover:bg-slate-100/80 hover:transform hover:scale-102"
+                      }`}
+                    >
+                      {formatDocTitle(doc)}
+                    </Link>
+                  );
+                })}
               </nav>
 
               <div className="mt-12 pt-8 border-t border-slate-200">

@@ -15,13 +15,15 @@ interface LiquidGlassProps {
   height?: number;
   className?: string;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
 const LiquidGlass: React.FC<LiquidGlassProps> = ({
   width = 300,
   height = 200,
   className = '',
-  style = {}
+  style = {},
+  children
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -256,18 +258,20 @@ const LiquidGlass: React.FC<LiquidGlassProps> = ({
           position: 'fixed',
           left: `${position.x}px`,
           top: `${position.y}px`,
-          width: `${width}px`,
-          height: `${height}px`,
+          // width: `${width}px`,
+          // height: `${height}px`,
           overflow: 'hidden',
-          borderRadius: '150px',
+          borderRadius: '16px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.25), 0 -10px 25px inset rgba(0, 0, 0, 0.15)',
           cursor: isDragging ? 'grabbing' : 'grab',
-          backdropFilter: `url(#${filterId.current}) blur(0.5px) contrast(1.2) brightness(1.05) saturate(1.1)`,
+          backdropFilter: `url(#${filterId.current}) blur(1px) contrast(1.2) brightness(1.05) saturate(1.1)`,
           zIndex: 9999,
           pointerEvents: 'auto',
           ...style
         }}
-      />
+      >
+        {children}
+      </div>
     </>
   );
 };

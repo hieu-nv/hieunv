@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SoftwareArchitectProfile from "./SoftwareArchitectProfile";
+import SoftwareArchitectProfile from "./SA";
 
 const ComponentShowcase: React.FC = () => {
   const [activeDemo, setActiveDemo] = useState<"profile" | "basic">("profile");
