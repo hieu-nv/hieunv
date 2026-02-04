@@ -357,7 +357,7 @@ const defaultProjects: Project[] = [
 const SA: React.FC<SAProps> = ({
   name = "Hieu Nguyen",
   title = "Senior Software Architect",
-  experience = "14+ Years Experience",
+  // experience = "14+ Years Experience",
   location = "Hanoi, VN",
   email = "hieunv@live.com",
   linkedin = "linkedin.com/in/hieu-nv",
@@ -422,15 +422,15 @@ const SA: React.FC<SAProps> = ({
     const getTypeColor = (type: Project["type"]) => {
       switch (type) {
         case "enterprise":
-          return "bg-blue-500";
+          return "from-blue-500 to-indigo-600";
         case "startup":
-          return "bg-green-500";
+          return "from-green-500 to-emerald-600";
         case "consulting":
-          return "bg-purple-500";
+          return "from-purple-500 to-violet-600";
         case "open-source":
-          return "bg-orange-500";
+          return "from-orange-500 to-red-600";
         default:
-          return "bg-gray-500";
+          return "from-gray-500 to-gray-600";
       }
     };
 
@@ -450,80 +450,83 @@ const SA: React.FC<SAProps> = ({
     };
 
     return (
-      <div className="relative">
-        {/* Timeline Line */}
-        <div className="absolute left-[31px] top-0 w-0.5 h-full bg-gray-300" />
+      <div className="relative group">
+        {/* Timeline Line with gradient */}
+        <div className="absolute left-[31px] top-0 w-0.5 h-full bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-400 opacity-40" />
 
-        {/* Timeline Dot */}
-        <div className="absolute left-6 top-[41px] w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow-lg" />
+        {/* Timeline Dot with pulse effect */}
+        <div className="absolute left-6 top-[41px] w-5 h-5 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 border-3 border-white shadow-xl group-hover:scale-125 transition-transform duration-300">
+          <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-30" />
+        </div>
 
-        {/* Project Card */}
-        <div className="ml-16 mb-8 timeline-project page-break-inside-avoid">
-          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            {/* Header */}
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">{project.icon}</span>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    {project.title}
-                  </h4>
-                  <p className="text-blue-600 text-sm font-medium">
-                    {project.company}
+        {/* Project Card with modern glassmorphism */}
+        <div className="ml-16 mb-10 timeline-project page-break-inside-avoid transform transition-all duration-300 hover:scale-[1.02]">
+          <div className="relative bg-white/90 backdrop-blur-md border border-white/40 rounded-2xl p-7 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+            {/* Decorative gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Animated border gradient */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-[-2px] bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-2xl blur-sm opacity-50" />
+            </div>
+
+            <div className="relative z-10">
+              {/* Header */}
+              <div className="flex items-start justify-between mb-5">
+                <div className="flex items-center gap-4">
+                  <div className="text-4xl p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl shadow-sm group-hover:scale-110 transition-transform duration-300">
+                    {project.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                      {project.title}
+                    </h4>
+                    <p className="text-blue-600 text-sm font-semibold flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
+                      {project.company}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span
+                    className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r ${getTypeColor(
+                      project.type
+                    )} shadow-md hover:shadow-lg transition-shadow duration-300`}
+                  >
+                    {getTypeLabel(project.type)}
+                  </span>
+                  <p className="text-slate-600 text-sm mt-2 font-medium flex items-center justify-end gap-1">
+                    <span className="text-xs">📅</span>
+                    {project.period}
                   </p>
                 </div>
               </div>
-              <div className="text-right h-12">
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-medium text-white ${getTypeColor(
-                    project.type
-                  )}`}
-                >
-                  {getTypeLabel(project.type)}
-                </span>
-                <p className="text-slate-700 text-sm mt-1">{project.period}</p>
+
+              {/* Description */}
+              <div className="mb-5 p-4 bg-gradient-to-br from-slate-50/80 to-blue-50/30 rounded-xl border border-slate-100/50">
+                <p className="text-slate-700 text-sm leading-relaxed text-justify">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Technologies */}
+              <div>
+                <h5 className="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+                  <span className="text-base">🛠️</span>
+                  Technologies Used
+                </h5>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="px-3 py-1.5 bg-gradient-to-r from-white to-slate-50 border border-slate-200 hover:border-blue-300 rounded-lg text-xs text-slate-800 font-semibold shadow-sm hover:shadow-md transition-all duration-200 hover:scale-105"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Description */}
-            <p className="text-slate-800 text-sm leading-relaxed mb-4 text-justify">
-              {project.description}
-            </p>
-
-            {/* Technologies */}
-            <div className="mb-4">
-              <h5 className="text-sm font-medium text-slate-800 mb-2 text-left">
-                Technologies Used:
-              </h5>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="px-2 py-1 bg-slate-100 border border-slate-300 rounded-md text-xs text-slate-800 font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Achievements */}
-            {/* <div>
-              <h5 className="text-sm font-medium text-slate-800 mb-2 text-left">
-                Key Achievements:
-              </h5>
-              <ul className="space-y-1">
-                {project.achievements.map((achievement, achIndex) => (
-                  <li
-                    key={achIndex}
-                    className="text-xs text-slate-700 flex items-start gap-2"
-                  >
-                    <span className="text-green-500 mt-0.5">✓</span>
-                    {achievement}
-                  </li>
-                ))}
-              </ul>
-            </div> */}
           </div>
         </div>
       </div>
@@ -553,6 +556,13 @@ const SA: React.FC<SAProps> = ({
                     alt={name}
                     className="w-50 h-50 rounded-[200px] border-4 border-white/50 shadow-2xl object-cover"
                   />
+                  {/* Stats overlay badge */}
+                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-xl border-4 border-white">
+                    <div className="text-center w-16 h-16">
+                      <div className="text-2xl font-bold leading-11">14+</div>
+                      <div className="text-xs font-medium">Years</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="space-y-3">
@@ -562,13 +572,34 @@ const SA: React.FC<SAProps> = ({
                 <h2 className="text-2xl font-semibold text-blue-600">
                   {title}
                 </h2>
-                <p className="text-lg text-slate-600 font-medium">
-                  {experience}
-                </p>
                 <div className="flex items-center justify-center xl:justify-start gap-2 text-slate-500">
                   <span>📍</span>
                   <span className="font-medium">{location}</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Key Metrics - Infographic Cards */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                <div className="text-5xl mb-2">9</div>
+                <div className="text-sm font-semibold opacity-90">Major Projects</div>
+                <div className="text-xs opacity-75 mt-1">Enterprise Scale</div>
+              </div>
+              <div className="bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                <div className="text-5xl mb-2">16+</div>
+                <div className="text-sm font-semibold opacity-90">Technologies</div>
+                <div className="text-xs opacity-75 mt-1">Mastered</div>
+              </div>
+              <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                <div className="text-5xl mb-2">5</div>
+                <div className="text-sm font-semibold opacity-90">Companies</div>
+                <div className="text-xs opacity-75 mt-1">FPT & Partners</div>
+              </div>
+              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                <div className="text-5xl mb-2">100%</div>
+                <div className="text-sm font-semibold opacity-90">Success Rate</div>
+                <div className="text-xs opacity-75 mt-1">Delivery</div>
               </div>
             </div>
 
@@ -594,11 +625,29 @@ const SA: React.FC<SAProps> = ({
               </div>
             </div>
 
+            {/* Professional Overview with Stats */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
               <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
                 <span className="text-2xl">👨‍💼</span>
                 Professional Overview
               </h3>
+              
+              {/* Key Highlights */}
+              <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600">C#</div>
+                  <div className="text-xs text-slate-600 font-medium mt-1">Primary</div>
+                </div>
+                <div className="text-center border-x border-slate-200">
+                  <div className="text-3xl font-bold text-indigo-600">Java</div>
+                  <div className="text-xs text-slate-600 font-medium mt-1">Expert</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-600">Cloud</div>
+                  <div className="text-xs text-slate-600 font-medium mt-1">Azure/AWS</div>
+                </div>
+              </div>
+
               <p className="text-slate-700 leading-relaxed text-justify">
                 "I am a seasoned Senior Software Architect with over 14 years of comprehensive experience in designing and implementing enterprise-scale solutions across diverse industries including digital marketing, fintech, gaming, video streaming, and cloud services. My expertise spans full-stack development, cloud architecture, and technical leadership, with proven success in consulting on business solutions and digital marketing strategies. I specialize in architecting scalable microservices, implementing modern frontend frameworks, and leading cross-functional development teams. Throughout my career, I have successfully delivered complex projects ranging from marketing automation platforms and pension management systems to video streaming platforms and image processing applications, consistently driving innovation while ensuring robust, maintainable, and high-performing solutions."
               </p>
@@ -607,17 +656,38 @@ const SA: React.FC<SAProps> = ({
 
           {/* Right Side - Skills */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-slate-800 text-center lg:text-left mb-8">
-              Technical Expertise
-            </h3>
+            {/* Skills Header with Stats */}
+            <div className="text-center lg:text-left mb-8">
+              <h3 className="text-2xl font-bold text-slate-800 mb-2">
+                Technical Expertise
+              </h3>
+              <div className="flex items-center justify-center lg:justify-start gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div>
+                  <span className="text-slate-600">16 Technologies</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></div>
+                  <span className="text-slate-600">92% Avg Proficiency</span>
+                </div>
+              </div>
+            </div>
 
             {/* Programming Languages */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">👨‍💻</span>
-                Programming Languages
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
+              {/* Decorative corner accent */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-bl-full"></div>
+              
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
+                  👨‍💻
+                </div>
+                <div>
+                  <div>Programming Languages</div>
+                  <div className="text-xs font-normal text-slate-500">5 Languages Mastered</div>
+                </div>
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-4 relative z-10">
                 {getSkillsByCategory("language").map((skill, index) => (
                   <SkillBar key={index} skill={skill} />
                 ))}
@@ -625,12 +695,19 @@ const SA: React.FC<SAProps> = ({
             </div>
 
             {/* Frontend Technologies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">🎨</span>
-                Frontend Technologies
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-400/20 to-transparent rounded-bl-full"></div>
+              
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
+                  🎨
+                </div>
+                <div>
+                  <div>Frontend Technologies</div>
+                  <div className="text-xs font-normal text-slate-500">4 Frameworks</div>
+                </div>
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-4 relative z-10">
                 {getSkillsByCategory("frontend").map((skill, index) => (
                   <SkillBar key={index} skill={skill} />
                 ))}
@@ -638,12 +715,19 @@ const SA: React.FC<SAProps> = ({
             </div>
 
             {/* Backend Technologies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">⚙️</span>
-                Backend Technologies
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-400/20 to-transparent rounded-bl-full"></div>
+              
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
+                  ⚙️
+                </div>
+                <div>
+                  <div>Backend Technologies</div>
+                  <div className="text-xs font-normal text-slate-500">4 Platforms</div>
+                </div>
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-4 relative z-10">
                 {getSkillsByCategory("backend").map((skill, index) => (
                   <SkillBar key={index} skill={skill} />
                 ))}
@@ -651,12 +735,19 @@ const SA: React.FC<SAProps> = ({
             </div>
 
             {/* Cloud Technologies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">☁️</span>
-                Cloud Technologies
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cyan-400/20 to-transparent rounded-bl-full"></div>
+              
+              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
+                  ☁️
+                </div>
+                <div>
+                  <div>Cloud Technologies</div>
+                  <div className="text-xs font-normal text-slate-500">3 Cloud Platforms</div>
+                </div>
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-4 relative z-10">
                 {getSkillsByCategory("cloud").map((skill, index) => (
                   <SkillBar key={index} skill={skill} />
                 ))}
@@ -679,15 +770,25 @@ const SA: React.FC<SAProps> = ({
       </div>
 
       {/* Project Timeline Section */}
-      <div className="relative z-10 py-16 px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4 text-slate-900">Projects</h3>
-            <p className="text-slate-700 max-w-2xl mx-auto">
+      <div className="relative z-10 py-20 px-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-6xl">💼</span>
+            </div>
+            <h3 className="text-4xl font-bold mb-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              Project Timeline
+            </h3>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
               A showcase of key projects and achievements throughout my career
               as a software architect, highlighting technical leadership and
               innovative solutions.
             </p>
+            <div className="mt-6 flex items-center justify-center gap-3">
+              <div className="h-1 w-20 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
+              <span className="text-blue-500 text-sm font-semibold">14+ Years of Excellence</span>
+              <div className="h-1 w-20 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
+            </div>
           </div>
 
           <div className="relative">
