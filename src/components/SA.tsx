@@ -377,20 +377,21 @@ const SA: React.FC<SAProps> = ({
   const SkillBar: React.FC<{ skill: Skill }> = ({ skill }) => (
     <div className="group">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-slate-800 font-semibold flex items-center gap-3">
+        <span className="text-slate-200 font-semibold flex items-center gap-3">
           <span className="text-xl">{skill.icon}</span>
           {skill.name}
         </span>
-        <span className="text-sm text-slate-600 font-bold bg-slate-100 px-2 py-1 rounded-full">
+        <span className="text-sm text-slate-300 font-bold bg-slate-800/50 px-2 py-1 rounded-full border border-slate-700/50">
           {skill.level}%
         </span>
       </div>
-      <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-slate-800/50 rounded-full h-3 overflow-hidden border border-slate-700/30">
         <div
-          className={`h-3 rounded-full transition-all duration-1000 ease-out shadow-sm ${skill.color} relative overflow-hidden`}
+          className={`h-3 rounded-full transition-all duration-1000 ease-out shadow-lg ${skill.color} relative overflow-hidden`}
           style={{ width: `${skill.level}%` }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 animate-shimmer" />
         </div>
       </div>
     </div>
@@ -401,17 +402,17 @@ const SA: React.FC<SAProps> = ({
     text: string;
     href?: string;
   }> = ({ icon, text, href }) => (
-    <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+    <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-800/50 transition-all duration-300 group border border-transparent hover:border-blue-500/30">
       <span className="text-2xl">{icon}</span>
       {href ? (
         <a
           href={href}
-          className="text-slate-700 hover:text-blue-600 transition-colors font-medium group-hover:underline"
+          className="text-slate-300 hover:text-blue-400 transition-colors font-medium group-hover:underline"
         >
           {text}
         </a>
       ) : (
-        <span className="text-slate-700 font-medium">{text}</span>
+        <span className="text-slate-300 font-medium">{text}</span>
       )}
     </div>
   );
@@ -452,78 +453,83 @@ const SA: React.FC<SAProps> = ({
     return (
       <div className="relative group">
         {/* Timeline Line with gradient */}
-        <div className="absolute left-[31px] top-0 w-0.5 h-full bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-400 opacity-40" />
+        <div className="absolute left-[31px] top-0 w-0.5 h-full bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500 opacity-50" />
 
         {/* Timeline Dot with pulse effect */}
-        <div className="absolute left-6 top-[41px] w-5 h-5 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 border-3 border-white shadow-xl group-hover:scale-125 transition-transform duration-300">
-          <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-30" />
+        <div className="absolute left-6 top-[41px] w-5 h-5 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 border-3 border-slate-900 shadow-xl shadow-blue-500/50 group-hover:scale-125 transition-transform duration-300 z-10">
+          <div className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-40" />
         </div>
 
-        {/* Project Card with modern glassmorphism */}
+        {/* Project Card with futuristic glassmorphism */}
         <div className="ml-16 mb-10 timeline-project page-break-inside-avoid transform transition-all duration-300 hover:scale-[1.02]">
-          <div className="relative bg-white/90 backdrop-blur-md border border-white/40 rounded-2xl p-7 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
-            {/* Decorative gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative group">
+            {/* Neon glow border */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
             
-            {/* Animated border gradient */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="absolute inset-[-2px] bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-2xl blur-sm opacity-50" />
-            </div>
+            <div className="relative bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-7 shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 overflow-hidden">
+              {/* Decorative gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-transparent to-purple-950/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Animated scan line effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/20 to-transparent animate-scan-line" />
+              </div>
 
-            <div className="relative z-10">
+              <div className="relative z-10">
               {/* Header */}
               <div className="flex items-start justify-between mb-5">
                 <div className="flex items-center gap-4">
-                  <div className="text-4xl p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl shadow-sm group-hover:scale-110 transition-transform duration-300">
-                    {project.icon}
+                    <div className="text-4xl p-3 bg-gradient-to-br from-blue-500/20 to-indigo-600/20 backdrop-blur-sm border border-blue-500/30 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300">
+                      {project.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                        {project.title}
+                      </h4>
+                      <p className="text-blue-400 text-sm font-semibold flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+                        {project.company}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                      {project.title}
-                    </h4>
-                    <p className="text-blue-600 text-sm font-semibold flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
-                      {project.company}
+                  <div className="text-right">
+                    <span
+                      className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r ${getTypeColor(
+                        project.type
+                      )} shadow-lg hover:shadow-xl transition-shadow duration-300`}
+                    >
+                      {getTypeLabel(project.type)}
+                    </span>
+                    <p className="text-slate-400 text-sm mt-2 font-medium flex items-center justify-end gap-1">
+                      <span className="text-xs">📅</span>
+                      {project.period}
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span
-                    className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold text-white bg-gradient-to-r ${getTypeColor(
-                      project.type
-                    )} shadow-md hover:shadow-lg transition-shadow duration-300`}
-                  >
-                    {getTypeLabel(project.type)}
-                  </span>
-                  <p className="text-slate-600 text-sm mt-2 font-medium flex items-center justify-end gap-1">
-                    <span className="text-xs">📅</span>
-                    {project.period}
+
+                {/* Description */}
+                <div className="mb-5 p-4 bg-gradient-to-br from-slate-800/60 to-blue-950/30 backdrop-blur-sm rounded-xl border border-slate-700/30">
+                  <p className="text-slate-300 text-sm leading-relaxed text-justify">
+                    {project.description}
                   </p>
                 </div>
-              </div>
 
-              {/* Description */}
-              <div className="mb-5 p-4 bg-gradient-to-br from-slate-50/80 to-blue-50/30 rounded-xl border border-slate-100/50">
-                <p className="text-slate-700 text-sm leading-relaxed text-justify">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Technologies */}
-              <div>
-                <h5 className="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
-                  <span className="text-base">🛠️</span>
-                  Technologies Used
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1.5 bg-gradient-to-r from-white to-slate-50 border border-slate-200 hover:border-blue-300 rounded-lg text-xs text-slate-800 font-semibold shadow-sm hover:shadow-md transition-all duration-200 hover:scale-105"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                {/* Technologies */}
+                <div>
+                  <h5 className="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span className="text-base">🛠️</span>
+                    Technologies Used
+                  </h5>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1.5 bg-gradient-to-r from-slate-800/70 to-slate-700/50 backdrop-blur-sm border border-slate-600/50 hover:border-blue-500/50 rounded-lg text-xs text-slate-200 font-semibold shadow-lg hover:shadow-blue-500/20 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -534,12 +540,19 @@ const SA: React.FC<SAProps> = ({
   };
 
   return (
-    <div className="relative w-full min-h-screen print-container">
-      {/* Modern geometric background */}
+    <div className="relative w-full min-h-screen print-container bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950">
+      {/* Futuristic Animated Background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-indigo-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-purple-400/10 to-pink-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-bl from-cyan-400/10 to-blue-500/10 rounded-full blur-2xl" />
+        {/* Animated Gradient Orbs */}
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-500/30 to-indigo-600/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-gradient-to-tr from-purple-500/30 to-pink-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-gradient-to-bl from-cyan-500/20 to-blue-600/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+        
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        
+        {/* Radial Gradient Overlay */}
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-slate-900/50 to-slate-950" />
       </div>
 
       {/* Main Content */}
@@ -551,106 +564,126 @@ const SA: React.FC<SAProps> = ({
             <div className="text-center xl:text-left">
               <div className="inline-block relative mb-8">
                 <div className="relative">
+                  {/* Neon glow ring */}
+                  <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full blur-lg opacity-75 animate-pulse" />
                   <img
                     src={avatar}
                     alt={name}
-                    className="w-50 h-50 rounded-[200px] border-4 border-white/50 shadow-2xl object-cover"
+                    className="relative w-50 h-50 rounded-full border-4 border-slate-800/50 shadow-2xl object-cover ring-2 ring-blue-500/50"
                   />
-                  {/* Stats overlay badge */}
-                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-xl border-4 border-white">
+                  {/* Stats overlay badge with neon effect */}
+                  {/* <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-xl border-4 border-slate-900 ring-2 ring-blue-400/50">
                     <div className="text-center w-16 h-16">
                       <div className="text-2xl font-bold leading-11">14+</div>
                       <div className="text-xs font-medium">Years</div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="space-y-3">
-                <h1 className="text-5xl xl:text-6xl font-bold text-slate-900 leading-tight tracking-tight">
+                <h1 className="text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight tracking-tight drop-shadow-lg">
                   {name}
                 </h1>
-                <h2 className="text-2xl font-semibold text-blue-600">
+                <h2 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                   {title}
                 </h2>
-                <div className="flex items-center justify-center xl:justify-start gap-2 text-slate-500">
+                <div className="flex items-center justify-center xl:justify-start gap-2 text-slate-400">
                   <span>📍</span>
                   <span className="font-medium">{location}</span>
                 </div>
               </div>
             </div>
 
-            {/* Key Metrics - Infographic Cards */}
+            {/* Key Metrics - Futuristic Neon Cards */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
-                <div className="text-5xl mb-2">9</div>
-                <div className="text-sm font-semibold opacity-90">Major Projects</div>
-                <div className="text-xs opacity-75 mt-1">Enterprise Scale</div>
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-500" />
+                <div className="relative bg-gradient-to-br from-blue-500/20 to-indigo-600/20 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                  <div className="text-5xl mb-2 font-bold bg-gradient-to-br from-blue-300 to-blue-500 bg-clip-text text-transparent">9</div>
+                  <div className="text-sm font-semibold text-blue-200">Major Projects</div>
+                  <div className="text-xs text-blue-300/70 mt-1">Enterprise Scale</div>
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
-                <div className="text-5xl mb-2">16+</div>
-                <div className="text-sm font-semibold opacity-90">Technologies</div>
-                <div className="text-xs opacity-75 mt-1">Mastered</div>
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-violet-600 rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-500" />
+                <div className="relative bg-gradient-to-br from-purple-500/20 to-violet-600/20 backdrop-blur-xl border border-purple-500/30 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                  <div className="text-5xl mb-2 font-bold bg-gradient-to-br from-purple-300 to-purple-500 bg-clip-text text-transparent">16+</div>
+                  <div className="text-sm font-semibold text-purple-200">Technologies</div>
+                  <div className="text-xs text-purple-300/70 mt-1">Mastered</div>
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
-                <div className="text-5xl mb-2">5</div>
-                <div className="text-sm font-semibold opacity-90">Companies</div>
-                <div className="text-xs opacity-75 mt-1">FPT & Partners</div>
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-500" />
+                <div className="relative bg-gradient-to-br from-green-500/20 to-emerald-600/20 backdrop-blur-xl border border-green-500/30 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                  <div className="text-5xl mb-2 font-bold bg-gradient-to-br from-green-300 to-green-500 bg-clip-text text-transparent">5</div>
+                  <div className="text-sm font-semibold text-green-200">Companies</div>
+                  <div className="text-xs text-green-300/70 mt-1">FPT & Partners</div>
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
-                <div className="text-5xl mb-2">100%</div>
-                <div className="text-sm font-semibold opacity-90">Success Rate</div>
-                <div className="text-xs opacity-75 mt-1">Delivery</div>
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl blur opacity-60 group-hover:opacity-100 transition duration-500" />
+                <div className="relative bg-gradient-to-br from-orange-500/20 to-red-600/20 backdrop-blur-xl border border-orange-500/30 rounded-2xl p-6 text-white shadow-xl hover:scale-105 transition-transform duration-300">
+                  <div className="text-5xl mb-2 font-bold bg-gradient-to-br from-orange-300 to-orange-500 bg-clip-text text-transparent">100%</div>
+                  <div className="text-sm font-semibold text-orange-200">Success Rate</div>
+                  <div className="text-xs text-orange-300/70 mt-1">Delivery</div>
+                </div>
               </div>
             </div>
 
-            {/* Contact Information - Modern Card */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
-              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">📧</span>
-                Contact Information
-              </h3>
-              <div className="grid gap-4">
-                <ContactInfo icon="📍" text={location} />
-                <ContactInfo icon="✉️" text={email} href={`mailto:${email}`} />
-                <ContactInfo
-                  icon="💼"
-                  text={linkedin}
-                  href={`https://${linkedin}`}
-                />
-                <ContactInfo
-                  icon="🐙"
-                  text={github}
-                  href={`https://${github}`}
-                />
+            {/* Contact Information - Glassmorphism Card */}
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-40 group-hover:opacity-70 transition duration-500" />
+              <div className="relative bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-slate-700/50">
+                <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-6 flex items-center gap-3">
+                  <span className="text-2xl">📧</span>
+                  Contact Information
+                </h3>
+                <div className="grid gap-4">
+                  <ContactInfo icon="📍" text={location} />
+                  <ContactInfo icon="✉️" text={email} href={`mailto:${email}`} />
+                  <ContactInfo
+                    icon="💼"
+                    text={linkedin}
+                    href={`https://${linkedin}`}
+                  />
+                  <ContactInfo
+                    icon="🐙"
+                    text={github}
+                    href={`https://${github}`}
+                  />
+                </div>
               </div>
             </div>
 
             {/* Professional Overview with Stats */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
-              <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <span className="text-2xl">👨‍💼</span>
-                Professional Overview
-              </h3>
-              
-              {/* Key Highlights */}
-              <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">C#</div>
-                  <div className="text-xs text-slate-600 font-medium mt-1">Primary</div>
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-40 group-hover:opacity-70 transition duration-500" />
+              <div className="relative bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-slate-700/50">
+                <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent mb-6 flex items-center gap-3">
+                  <span className="text-2xl">👨‍💼</span>
+                  Professional Overview
+                </h3>
+                
+                {/* Key Highlights */}
+                <div className="grid grid-cols-3 gap-3 mb-6 p-4 bg-gradient-to-r from-blue-950/50 to-indigo-950/50 rounded-xl border border-blue-500/20">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">C#</div>
+                    <div className="text-xs text-slate-400 font-medium mt-1">Primary</div>
+                  </div>
+                  <div className="text-center border-x border-slate-700">
+                    <div className="text-3xl font-bold bg-gradient-to-br from-indigo-400 to-indigo-600 bg-clip-text text-transparent">Java</div>
+                    <div className="text-xs text-slate-400 font-medium mt-1">Expert</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold bg-gradient-to-br from-purple-400 to-purple-600 bg-clip-text text-transparent">Cloud</div>
+                    <div className="text-xs text-slate-400 font-medium mt-1">Azure/AWS</div>
+                  </div>
                 </div>
-                <div className="text-center border-x border-slate-200">
-                  <div className="text-3xl font-bold text-indigo-600">Java</div>
-                  <div className="text-xs text-slate-600 font-medium mt-1">Expert</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">Cloud</div>
-                  <div className="text-xs text-slate-600 font-medium mt-1">Azure/AWS</div>
-                </div>
-              </div>
 
-              <p className="text-slate-700 leading-relaxed text-justify">
-                "I am a seasoned Senior Software Architect with over 14 years of comprehensive experience in designing and implementing enterprise-scale solutions across diverse industries including digital marketing, fintech, gaming, video streaming, and cloud services. My expertise spans full-stack development, cloud architecture, and technical leadership, with proven success in consulting on business solutions and digital marketing strategies. I specialize in architecting scalable microservices, implementing modern frontend frameworks, and leading cross-functional development teams. Throughout my career, I have successfully delivered complex projects ranging from marketing automation platforms and pension management systems to video streaming platforms and image processing applications, consistently driving innovation while ensuring robust, maintainable, and high-performing solutions."
-              </p>
+                <p className="text-slate-300 leading-relaxed text-justify">
+                  "I am a seasoned Senior Software Architect with over 14 years of comprehensive experience in designing and implementing enterprise-scale solutions across diverse industries including digital marketing, fintech, gaming, video streaming, and cloud services. My expertise spans full-stack development, cloud architecture, and technical leadership, with proven success in consulting on business solutions and digital marketing strategies. I specialize in architecting scalable microservices, implementing modern frontend frameworks, and leading cross-functional development teams. Throughout my career, I have successfully delivered complex projects ranging from marketing automation platforms and pension management systems to video streaming platforms and image processing applications, consistently driving innovation while ensuring robust, maintainable, and high-performing solutions."
+                </p>
+              </div>
             </div>
           </div>
 
@@ -658,99 +691,111 @@ const SA: React.FC<SAProps> = ({
           <div className="space-y-6">
             {/* Skills Header with Stats */}
             <div className="text-center lg:text-left mb-8">
-              <h3 className="text-2xl font-bold text-slate-800 mb-2">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
                 Technical Expertise
               </h3>
               <div className="flex items-center justify-center lg:justify-start gap-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"></div>
-                  <span className="text-slate-600">16 Technologies</span>
+                  <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full animate-pulse"></div>
+                  <span className="text-slate-400">16 Technologies</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></div>
-                  <span className="text-slate-600">92% Avg Proficiency</span>
+                  <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                  <span className="text-slate-400">92% Avg Proficiency</span>
                 </div>
               </div>
             </div>
 
             {/* Programming Languages */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
-              {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-bl-full"></div>
-              
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                  👨‍💻
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+              <div className="relative bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-blue-500/30 overflow-hidden">
+                {/* Decorative corner accent */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-full"></div>
+                
+                <h4 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent mb-6 flex items-center gap-3 relative z-10">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white text-xl shadow-lg shadow-blue-500/50">
+                    👨‍💻
+                  </div>
+                  <div>
+                    <div>Programming Languages</div>
+                    <div className="text-xs font-normal text-slate-400">5 Languages Mastered</div>
+                  </div>
+                </h4>
+                <div className="space-y-4 relative z-10">
+                  {getSkillsByCategory("language").map((skill, index) => (
+                    <SkillBar key={index} skill={skill} />
+                  ))}
                 </div>
-                <div>
-                  <div>Programming Languages</div>
-                  <div className="text-xs font-normal text-slate-500">5 Languages Mastered</div>
-                </div>
-              </h4>
-              <div className="space-y-4 relative z-10">
-                {getSkillsByCategory("language").map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
               </div>
             </div>
 
             {/* Frontend Technologies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-400/20 to-transparent rounded-bl-full"></div>
-              
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
-                <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                  🎨
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+              <div className="relative bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-pink-500/30 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-bl-full"></div>
+                
+                <h4 className="text-lg font-bold bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent mb-6 flex items-center gap-3 relative z-10">
+                  <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center text-white text-xl shadow-lg shadow-pink-500/50">
+                    🎨
+                  </div>
+                  <div>
+                    <div>Frontend Technologies</div>
+                    <div className="text-xs font-normal text-slate-400">4 Frameworks</div>
+                  </div>
+                </h4>
+                <div className="space-y-4 relative z-10">
+                  {getSkillsByCategory("frontend").map((skill, index) => (
+                    <SkillBar key={index} skill={skill} />
+                  ))}
                 </div>
-                <div>
-                  <div>Frontend Technologies</div>
-                  <div className="text-xs font-normal text-slate-500">4 Frameworks</div>
-                </div>
-              </h4>
-              <div className="space-y-4 relative z-10">
-                {getSkillsByCategory("frontend").map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
               </div>
             </div>
 
             {/* Backend Technologies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-400/20 to-transparent rounded-bl-full"></div>
-              
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                  ⚙️
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-violet-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+              <div className="relative bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-purple-500/30 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-bl-full"></div>
+                
+                <h4 className="text-lg font-bold bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent mb-6 flex items-center gap-3 relative z-10">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center text-white text-xl shadow-lg shadow-purple-500/50">
+                    ⚙️
+                  </div>
+                  <div>
+                    <div>Backend Technologies</div>
+                    <div className="text-xs font-normal text-slate-400">4 Platforms</div>
+                  </div>
+                </h4>
+                <div className="space-y-4 relative z-10">
+                  {getSkillsByCategory("backend").map((skill, index) => (
+                    <SkillBar key={index} skill={skill} />
+                  ))}
                 </div>
-                <div>
-                  <div>Backend Technologies</div>
-                  <div className="text-xs font-normal text-slate-500">4 Platforms</div>
-                </div>
-              </h4>
-              <div className="space-y-4 relative z-10">
-                {getSkillsByCategory("backend").map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
               </div>
             </div>
 
             {/* Cloud Technologies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cyan-400/20 to-transparent rounded-bl-full"></div>
-              
-              <h4 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-3 relative z-10">
-                <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                  ☁️
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+              <div className="relative bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-cyan-500/30 overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full"></div>
+                
+                <h4 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-6 flex items-center gap-3 relative z-10">
+                  <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-lg shadow-cyan-500/50">
+                    ☁️
+                  </div>
+                  <div>
+                    <div>Cloud Technologies</div>
+                    <div className="text-xs font-normal text-slate-400">3 Cloud Platforms</div>
+                  </div>
+                </h4>
+                <div className="space-y-4 relative z-10">
+                  {getSkillsByCategory("cloud").map((skill, index) => (
+                    <SkillBar key={index} skill={skill} />
+                  ))}
                 </div>
-                <div>
-                  <div>Cloud Technologies</div>
-                  <div className="text-xs font-normal text-slate-500">3 Cloud Platforms</div>
-                </div>
-              </h4>
-              <div className="space-y-4 relative z-10">
-                {getSkillsByCategory("cloud").map((skill, index) => (
-                  <SkillBar key={index} skill={skill} />
-                ))}
               </div>
             </div>
           </div>
@@ -760,10 +805,10 @@ const SA: React.FC<SAProps> = ({
       {/* Scroll Indicator */}
       <div className="relative z-10 py-12 text-center">
         <div className="animate-bounce">
-          <div className="w-12 h-12 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl shadow-lg">
+          <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-xl shadow-lg shadow-blue-500/50 ring-2 ring-blue-400/50">
             ⬇️
           </div>
-          <p className="text-slate-600 text-lg font-medium">
+          <p className="text-slate-300 text-lg font-medium">
             Explore Project Timeline
           </p>
         </div>
@@ -776,18 +821,18 @@ const SA: React.FC<SAProps> = ({
             <div className="inline-block mb-4">
               <span className="text-6xl">💼</span>
             </div>
-            <h3 className="text-4xl font-bold mb-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <h3 className="text-4xl font-bold mb-5 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
               Project Timeline
             </h3>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
               A showcase of key projects and achievements throughout my career
               as a software architect, highlighting technical leadership and
               innovative solutions.
             </p>
             <div className="mt-6 flex items-center justify-center gap-3">
-              <div className="h-1 w-20 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
-              <span className="text-blue-500 text-sm font-semibold">14+ Years of Excellence</span>
-              <div className="h-1 w-20 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
+              <div className="h-1 w-20 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full" />
+              <span className="text-blue-400 text-sm font-semibold">14+ Years of Excellence</span>
+              <div className="h-1 w-20 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full" />
             </div>
           </div>
 
@@ -797,8 +842,11 @@ const SA: React.FC<SAProps> = ({
                 <ProjectCard key={project.id} project={project} index={index} />
               ))
             ) : (
-              <div className="text-slate-800 text-center p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20">
-                <p>No projects found. Check console for debugging info.</p>
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl blur opacity-40" />
+                <div className="relative text-slate-300 text-center p-8 bg-slate-900/60 backdrop-blur-xl rounded-2xl shadow-xl border border-red-500/30">
+                  <p>No projects found. Check console for debugging info.</p>
+                </div>
               </div>
             )}
           </div>
