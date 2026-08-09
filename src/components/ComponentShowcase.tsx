@@ -17,7 +17,7 @@ const ComponentShowcase: React.FC = () => {
                 : "bg-white/10 text-white/70 hover:bg-white/20"
             }`}
           >
-            👨‍💻 Software Architect Profile
+            👨‍💻 Senior Software Engineer Profile
           </button>
           <button
             onClick={() => setActiveDemo("basic")}

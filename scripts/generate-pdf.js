@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * PDF Generation Script for Software Architect Profile
+ * PDF Generation Script for Senior Software Engineer Profile
  * 
  * This script can be used to generate a PDF version of the profile
  * using Puppeteer for more control over the output.
@@ -68,7 +68,7 @@ async function generatePDF() {
     });
     
     // Generate PDF
-    const outputPath = path.join(process.cwd(), 'Hieu_Nguyen_Software_Architect_Profile.pdf');
+    const outputPath = path.join(process.cwd(), 'Hieu_Nguyen_Senior_Software_Engineer_Profile.pdf');
     
     await page.pdf({
       path: outputPath,

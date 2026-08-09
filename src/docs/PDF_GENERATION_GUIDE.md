@@ -1,6 +1,6 @@
 # PDF Generation Guide
 
-This guide explains how to generate a PDF version of your Software Architect Profile.
+This guide explains how to generate a PDF version of your Senior Software Engineer Profile.
 
 ## Method 1: Browser Print (Recommended)
 
@@ -45,7 +45,7 @@ For more control over the PDF output, you can use the automated script:
    node scripts/generate-pdf.js
    ```
 
-This will create `Hieu_Nguyen_Software_Architect_Profile.pdf` in your project root.
+This will create `Hieu_Nguyen_Senior_Software_Engineer_Profile.pdf` in your project root.
 
 ## PDF Optimization Features
 
